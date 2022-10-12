@@ -1,7 +1,7 @@
-####mkdir proj-scrapy-prodrivers\n
+mkdir proj-scrapy-prodrivers
 
-####git clone https://github.com/ricaportela/prodrivers-proj.git\n
+git clone https://github.com/ricaportela/prodrivers-proj.git
 
-####pip install scrapy
+pip install scrapy
 
-####scrapy shell 'https://www.prodrivers.com/jobs/?City=&State=Florida'
+scrapy shell 'https://www.prodrivers.com/jobs/?City=&State=Florida'
