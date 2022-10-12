@@ -6,18 +6,18 @@ from prodrivers.items import ProdriversItem
 
 class SpiderprodriversSpider(scrapy.Spider):
     name = "spiderprodrivers"
-    start_urls = ["https://www.prodrivers.com/jobs/?City=&State=Florida"]
+    start_urls = ["https://www.prodrivers.com/jobs/?City=&State=Alabama"]
     custom_settings = {
         "FEED_EXPORT_FIELDS": [
             "title",
             "city",
             "basepay",
-            "shortDescription",
+            # "shortDescription",
             "jobDescription",
         ],
     }
     def start_requests(self):
-        url = 'https://www.prodrivers.com/jobs/?City=&State=Florida'
+        url = 'https://www.prodrivers.com/jobs/?City=&State=Alabama'
 
         yield scrapy.Request(url)
 
@@ -25,15 +25,14 @@ class SpiderprodriversSpider(scrapy.Spider):
         item = ProdriversItem()
         for selector in response.css(".accordionHead"):
             item["title"] = selector.css("h2 ::text").get(),
-            item["city"] = selector.css("h3 ::text").get(),
+            item["city"] = str(selector.css("h3 ::text").get()).strip(),
             item["basepay"] = selector.css(".basePay ::text").get(),
-            item["shortDescription"] = selector.css(".shortDescription ::text").get(),
-            lista = []
-            for li_selector in response.xpath("/html/body/section[2]/div[2]/div/div[1]/div[2]/div/ul[1]"):
-                lista.append("".join(li_selector.xpath('.//li//text()').getall()))
+            # item["shortDescription"] = selector.css(".shortDescription ::text").get(),
+            listajobdescription = []
+            for li_selector in response.xpath("/html/body/section[2]/div[2]/div/div[1]/div[2]/div/ul[1]/li").getall():
+                clear_selector = remove_tags(li_selector).replace('\xa0',' ')
+                listajobdescription.append(clear_selector)
             
-            item['jobDescription'] = lista
+            item['jobDescription'] = listajobdescription
 
             yield item
-
-#/html/body/section[2]/div[2]/div/div[1]/div[2]/div/ul[1]
