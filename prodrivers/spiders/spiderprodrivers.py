@@ -1,3 +1,4 @@
+from pyparsing import srange
 import scrapy
 from w3lib.html import remove_tags
 from prodrivers.items import ProdriversItem
@@ -23,11 +24,16 @@ class SpiderprodriversSpider(scrapy.Spider):
     def parse(self, response):
         item = ProdriversItem()
         for selector in response.css(".accordionHead"):
-            item["title"] = selector.xpath(".//h2/text()").get(),
-            item["city"] = selector.xpath(".//h3/text()").get(),
+            item["title"] = selector.css("h2 ::text").get(),
+            item["city"] = selector.css("h3 ::text").get(),
             item["basepay"] = selector.css(".basePay ::text").get(),
-            item["shortDescription"] = selector.xpath(".//p[2]/text()").get(),
-            for li in selector.xpath("/html/body/section[2]/div[2]/div/div[1]/div[2]/div/ul[1]"):
-                item['jobDescription'] = li.xpath('.//li//text()').getall(),
+            item["shortDescription"] = selector.css(".shortDescription ::text").get(),
+            lista = []
+            for li_selector in response.xpath("/html/body/section[2]/div[2]/div/div[1]/div[2]/div/ul[1]"):
+                lista.append("".join(li_selector.xpath('.//li//text()').getall()))
+            
+            item['jobDescription'] = lista
 
             yield item
+
+#/html/body/section[2]/div[2]/div/div[1]/div[2]/div/ul[1]
