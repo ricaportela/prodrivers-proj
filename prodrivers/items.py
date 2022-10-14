@@ -15,23 +15,22 @@ def remove_blank_space(valor):
 
 class ProdriversItem(scrapy.Item):
     # define the fields for your item here like:
-    # title = scrapy.Field(
-    #     input_processor=MapCompose(
-    #         str.strip,
-    #     ),
-    # )
-    # city = scrapy.Field(
-    #     input_processor=MapCompose(
-    #         str.strip,
-    #     ),
-    # )
-    # basepay = scrapy.Field(
-    #     input_processor=MapCompose(
-    #         str.strip,
-    #     ),
-    # )
-    # # shortDescription = scrapy.Field()
-    # jobDescription = scrapy.Field()
-    # jobRequirements = scrapy.Field()
-    # jobBenefits = scrapy.Field()
-    pass
+    title = scrapy.Field(
+        input_processor=MapCompose(
+            str.strip,
+        ),
+    )
+    city = scrapy.Field(
+        input_processor=MapCompose(
+            str.strip,
+        ),
+    )
+    basepay = scrapy.Field(
+        input_processor=MapCompose(
+            str.strip,
+        ),
+    )
+    shortDescription = scrapy.Field()
+    jobDescription = scrapy.Field()
+    jobRequirements = scrapy.Field()
+    jobBenefits = scrapy.Field()

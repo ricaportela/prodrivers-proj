@@ -1,8 +1,15 @@
+app_greg.py
+app_portela.py
+core.py
+app.py
+*ipynb
 
 .scrapy/
 __pycache__/
 *.csv
 .vscode/
+.ipynb_checkpoints/*
+data/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
