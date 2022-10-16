@@ -1,3 +1,4 @@
+from csv import DictReader
 from pyparsing import srange
 import scrapy
 from w3lib.html import remove_tags
@@ -6,9 +7,16 @@ from prodrivers.items import ProdriversItem
 
 class SpiderprodriversSpider(scrapy.Spider):
     name = "spiderprodrivers"
-    city = "Arizona"
-    start_urls = ["https://www.prodrivers.com/jobs/?City=&State=Arizona"]
+    city = "California"
+    start_urls = [f"https://www.prodrivers.com/jobs/?City=&State={city}"]
+    def start_requests(self):
+        with open ('cities.csv') as rows:
+            for row in DictReader(rows):
+                city=row['city']
+                link = str(f"https://www.prodrivers.com/jobs/?City=&State={city}")
 
+                yield scrapy.Request(url=link ,
+                callback=self.parse)
     def parse(self, response):
         for item in response.xpath("/html/body/section[2]/div[2]/div/div"):
             yield {
