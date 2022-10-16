@@ -11,8 +11,6 @@ from w3lib.html import remove_tags
 
 def remove_blank_space(valor):
     return valor.strip()
-
-
 class ProdriversItem(scrapy.Item):
     # define the fields for your item here like:
     title = scrapy.Field(
