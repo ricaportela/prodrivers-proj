@@ -30,7 +30,7 @@ class ProdriversItem(scrapy.Item):
             str.strip,
         ),
     )
-    shortDescription = scrapy.Field()
+    #shortDescription = scrapy.Field()
     jobDescription = scrapy.Field()
     jobRequirements = scrapy.Field()
     jobBenefits = scrapy.Field()

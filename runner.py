@@ -9,8 +9,8 @@ try:
             'scrapy',
             'crawl',
             'spiderprodrivers',
-            # '-O',
-            # 'jobs.csv'
+            '-O',
+            'jobs.csv'
         ]
     )
 except SystemExit:

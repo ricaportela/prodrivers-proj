@@ -45,14 +45,14 @@ ROBOTSTXT_OBEY = True
 #   'Accept-Language': 'en',
 #}
 FEED_EXPORT_ENCODING = 'utf-8'
-filename = datetime.datetime.now().strftime('%m-%d-%Y-%H%M%S') 
+filename = datetime.datetime.now().strftime('%m-%d-%Y') 
 
 FEEDS = {
     f'data/%(name)s/fjobs-{filename}.csv': {
         'format': 'csv',
         'encoding': 'utf8',
         'indent': 4,
-        'overwrite': False
+        'overwrite': True
 
         }
 }
